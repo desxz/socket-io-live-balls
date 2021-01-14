@@ -1,0 +1,10 @@
+{
+  "name": "socket-io-live-balls",
+  "description": "",
+  "main": "",
+  "authors": [
+    "desxz <muratgun@posta.mu.edu.tr>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/desxz/socket-io-live-balls"
+}
