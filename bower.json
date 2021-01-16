@@ -6,5 +6,8 @@
     "desxz <muratgun@posta.mu.edu.tr>"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/desxz/socket-io-live-balls"
+  "homepage": "https://github.com/desxz/socket-io-live-balls",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  }
 }

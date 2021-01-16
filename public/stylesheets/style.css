@@ -61,6 +61,7 @@ body{
   margin-right: 10px!important;
   margin-left: 10px!important;
   height: 90px;
+  overflow-y: auto;
  
 
 }
