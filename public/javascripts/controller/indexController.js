@@ -21,16 +21,22 @@ app.controller('indexController', ['$scope','indexFactory',($scope,indexFactory)
             element.scrollTop = element.scrollHeight;
         });
     }
+
+    function showBubble(id, message){
+        $('#' + id).find('.message').show().html(message);
+        setTimeout(() => {
+            $('#' + id).find('.message').hide();
+        }, 2000);
+    }
     
-    function initSocket(username){
+    async function initSocket(username){
         const connectionOptions = {
             reconnectionAttempts:3,
             reconnectionDelay:600
         }
         
-        indexFactory.connectSocket('http://localhost:3000/', connectionOptions)
-        .then((socket)=>{
-            socket.emit('newUser', {username});
+        const socket = await indexFactory.connectSocket('http://localhost:3000/', connectionOptions);
+        socket.emit('newUser', {username});
 
             socket.on('initPlayers', (data)=>{
                 $scope.players = data;
@@ -74,6 +80,7 @@ app.controller('indexController', ['$scope','indexFactory',($scope,indexFactory)
             socket.on('nMessage', (data) => {
                 $scope.messages.push(data);
                 $scope.$apply();
+                showBubble(data.socketId, data.text);
                 scrollTop();
             })
 
@@ -106,11 +113,9 @@ app.controller('indexController', ['$scope','indexFactory',($scope,indexFactory)
                 $scope.message = "";
 
                 socket.emit('newMessage', messageData);
+                showBubble(socket.id, message);
                 scrollTop();
-            }
-
-        }).catch((socket)=>{
-            console.log('Error', socket);
-        });
-    }
-}])
+            }    
+            
+        };
+}]);

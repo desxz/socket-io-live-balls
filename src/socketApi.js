@@ -44,7 +44,8 @@ io.on('connection', (socket)=>{
     });
 
     socket.on('newMessage', (data) => {
-        socket.broadcast.emit('nMessage', data);
+        const messageData = Object.assign({socketId: socket.id},data);
+        socket.broadcast.emit('nMessage', messageData);
     });
 
 });
